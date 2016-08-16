@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="toDoApp"> <!-- Use the ng-app directive to  hook our application module up to our HTML -->
+  <head>
+    <meta charset="utf-8">
+    <title>toDo</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type='text/javascript' src='js/controller.js'></script>
+    <script type='text/javascript' src='js/ToDoFactory.js'></script>
+    <script type='text/javascript' src='js/ToDoService.js'></script>
+  </head>
+  <body>
+    <div ng-controller='ToDoController as controller'> <!-- Use the ng-controller directive 'controller as' syntax to instantiate the controller to a variable that can then be accessed in the HTML -->
+      <p ng-repeat='todo in controller.todos'> <!-- ng-repeat assigns temporary variable 'todo' to every item in controller.todos -->
+        {{ todo.task }}: {{ todo.completed ? "completed" : "not completed" }} <!-- use {{Mustache}} syntax to interpolate the todo attribute on our ToDoController into our HTML like Ruby #{string interpolation} -->
+        <button ng-click='todo.complete();'>Complete</button>
+      </p>
+      <p>
+        <input type='text' ng-model='todoText'>
+        <button ng-click="controller.addToDo(todoText);"> Add a ToDo</button> <!-- we're listening for events on click, scoped to the button -->
+        <button ng-click='controller.removeToDo();'>Remove last ToDo</button>
+    </p>
+    </div>
+  </body>
+</html>
